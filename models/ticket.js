@@ -20,6 +20,11 @@ const ticketSchema = new mongoose.Schema({
     status: {
         type: Boolean,
         default: false
+    },
+    bookStatus: {
+        type: String,
+        enum: ["not-booked", "pending", "completed", "cancelled", "in-progress"],
+        default: "not-booked"
     }
 });
 

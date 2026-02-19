@@ -4,14 +4,17 @@ const sendRequest = async (req, res) => {
     const address = req.body.address;
     const service = req.body.service;
     const description = req.body.description;
+    const bookStatus = "not-booked";
     const status = false;
-    const ticket = await Ticket.create({ name, address, service, description, status });
+    const ticket = await Ticket.create({ name, address, service, description, status, bookStatus });
     res.status(201).json({ ticket });
 
 }
 const updateRequest = async (req, res) => {
     const id = req.params.id;
-    const ticket = await Ticket.findByIdAndUpdate(id, req.body, { new: true });
+    const bookStatus = req.body.bookStatus;
+    const status = req.body.status;
+    const ticket = await Ticket.findByIdAndUpdate(id, { bookStatus, status }, { new: true });
     res.status(200).json({ ticket });
 }
 const deleteRequest = async (req, res) => {
